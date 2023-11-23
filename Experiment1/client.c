@@ -1,34 +1,29 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<unistd.h>
-#include<arpa/inet.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <string.h>
+#define port 5001
 int main()
 {
+    int sock_fd;
+    struct sockaddr_in serv_addr;
 
-	char *ip="127.0.0.1";
-	int port=5566;
-	int sock;
-
-	struct sockaddr_in addr;
-	socklen_t addr_size;
-	char buffer[1024];
-	int n;
-//create client socket
-
-sock=socket(AF_INET,SOCK_STREAM,0);
-if(sock<0)
-{
-	perror("[1] client socket  error ");
-	exit(1);
-}
-	printf("[1] TCP client socket created \n");
-
-memset(&addr,'\0',sizeof(addr));
-addr.sin_family=AF_INET;
-addr.sin_port=port;
-addr.sin_addr.s_addr=inet_addr(ip);
-connect(sock,(struct sockaddr*)&addr,sizeof(addr));
-printf("connected to server\n");
-return 0;
+    if ((sock_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        perror("error");
+        return 0;
+    }
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(port);
+    if (connect(sock_fd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    {
+        perror("Error");
+        return 0;
+    }
+    char str[678] = {};
+    char *buffer = "wbfjlgn jonoe\n";
+    send(sock_fd, buffer, strlen(buffer), 0);
+    recv(sock_fd, str, sizeof(str), 0);
+    printf("%s\n", str);
+    return 0;
 }

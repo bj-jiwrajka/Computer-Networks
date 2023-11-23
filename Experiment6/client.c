@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#define PORT 3002
+#define PORT 3000
 
 int main() {
     int sockfd;
@@ -29,13 +29,14 @@ int main() {
     printf("[+] Connected to Server.\n");
 
     printf("[+] Loading content of the file... \n\n");
+    FILE *fp = fopen("file2.png", "wb");
     while (1) {
+        // memset(buffer, 0, sizeof(buffer));
         int n = recv(sockfd, buffer, sizeof(buffer), 0);
         if (n <= 0) {
             break;
         }
-        printf("%.*s", n, buffer);
-        bzero(buffer, sizeof(buffer));
+        fprintf(fp, "%.*s", n, buffer);
     }
 
     printf("\n\n[+] File data received successfully.\n");

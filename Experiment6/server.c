@@ -4,12 +4,12 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#define PORT 3002
-#define FILENAME "test.txt"
+#define PORT 3000
+#define FILENAME "file.png"
 
 int main()
 {
-    int sockfd, new_sock;
+    int sockfd, cli_fd;
     struct sockaddr_in server_addr, new_addr;
     socklen_t addr_size;
     char buffer[1024];
@@ -35,9 +35,9 @@ int main()
 
     listen(sockfd, 10);
     addr_size = sizeof(new_addr);
-    new_sock = accept(sockfd, (struct sockaddr *)&new_addr, &addr_size);
+    cli_fd = accept(sockfd, (struct sockaddr *)&new_addr, &addr_size);
 
-    FILE *fp = fopen(FILENAME, "r");
+    FILE *fp = fopen(FILENAME, "rb");
     if (fp == NULL)
     {
         perror("[-] Error opening file");
@@ -46,7 +46,7 @@ int main()
 
     while ((n = fread(buffer, 1, sizeof(buffer), fp)) > 0)
     {
-        send(new_sock, buffer, n, 0);
+        send(cli_fd, buffer, n, 0);
     }
 
     fclose(fp);

@@ -69,7 +69,7 @@ int main()
 
     if (fp != NULL)
     {
-        size_t newLen = fread(result, sizeof(char), BUFFER_SIZE, fp);
+        size_t newLen = fread(result, 1, BUFFER_SIZE, fp);
         if (ferror(fp) != 0)
         {
             fputs("Error reading file", stderr);

@@ -10,6 +10,7 @@ int main()
 {
     int sockfd;
     struct sockaddr_in server_addr;
+    int addr_len = sizeof(server_addr);
 
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     if (sockfd == -1)
@@ -39,7 +40,7 @@ int main()
         sendto(sockfd, &num, sizeof(num), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
         printf("Number sent: %d\n", num);
 
-        recvfrom(sockfd, &result, sizeof(result), 0, NULL, NULL);
+        recvfrom(sockfd, &result, sizeof(result), 0,(struct sockaddr *)&server_addr, (socklen_t*)&addr_len);
         printf("Answer received (Factorial of the given number): %d\n\n", result);
     }
 
