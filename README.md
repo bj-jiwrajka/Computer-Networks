@@ -22,7 +22,31 @@ cd Computer-Networks/ExperimentX
 
 ## Usage
 
-This section provides details on how to use the codes in this repository. You may include information about specific lab exercises, projects, or code structure. If your repository includes documentation or a wiki, provide links to them here.
+This repository includes code for the following lab experiments:
+
+1. **TCP Client-Server Architecture**  
+   Implement a Client-Server socket program in C to retrieve information (any text or system info) from a TCP server to a TCP client.
+
+2. **TCP Chat Server**  
+   Implement a Client-Server socket program in C where two client systems connect to a central server for communication or chat.
+
+3. **Go-Back-N Protocol**  
+   Implement a socket program to demonstrate the Go-Back-N Protocol using TCP.
+
+4. **Echo Client and Echo Server using UDP**  
+   Implement an Echo Client and Server using UDP to estimate the round trip time. The server should be capable of handling multiple connections simultaneously.
+
+5. **Connectionless Iterative Service**  
+   Write a program where the server calculates the factorial of a number sent by the client and sends it back.
+
+6. **FTP Server**  
+   Implement a Client-Server socket program in C to create an FTP server using TCP. The server will send a saved text file to the client upon request.
+
+7. **Remote Command Execution**  
+   Implement a program for remote command execution using sockets. The client sends a command to the server, which executes it and sends back the result.
+
+8. **Web Server**  
+   Write a program to implement a Web Server where the client requests a web page stored on the server.
 
 ## Contributing
 
